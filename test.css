@@ -1,0 +1,19 @@
+.cell {
+	width: 100px;
+	height: 100px;
+	background-color: cadetblue;
+	border: 2px solid black;
+}
+.cell:focus {
+	background-color: red;
+}
+.cell:hover {
+	background-color: blue;
+}
+
+.wrapper {
+	display: grid;
+	grid-template-columns: auto auto auto;
+	justify-items: center;
+	justify-content: center;
+}

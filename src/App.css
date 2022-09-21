@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+
+.cell {
+	width: 100px;
+	height: 100px;
+	background-color: cadetblue;
+	border: 2px solid black;
+}
+
+.wrapper {
+	display: grid;
+	grid-template-columns: auto auto auto;
+	justify-items: center;
+	justify-content: center;
+}
