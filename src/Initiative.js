@@ -22,12 +22,12 @@ const Initiative = ({ uuid, cellUuid }) => {
 const StyledDiv = styled.div`
   box-sizing: border-box;
   background-color: ${(props) => props.backgroundColor};
-  width: 35%;
-  height: 35%;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
   :hover {
     border: 2px solid blue;
   }
 `;
 
-export default memo(Initiative);
+export default Initiative;
