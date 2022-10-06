@@ -1,19 +1,16 @@
 import React, { memo, useState } from "react";
 import styled from "styled-components";
 import ActiveCell from "./ActiveCell";
-import "./App.css";
+import "../App.css";
 import Initiative from "./Initiative";
+import DropZones from "./DropZones";
 
-const Cell = ({ cell }) => {
-
+const Cell = ({ cell, dragging }) => {
   console.log(cell);
   return (
     <CellContainer>
-      <TrackAbove />
-      <LineBefore />
-      <ActiveCell cell={cell}/>
-      <LineAfter />
-      <TrackBelow />
+      {dragging && <DropZones />}
+      <ActiveCell cell={cell} dragging={dragging} />
     </CellContainer>
   );
 };
@@ -31,46 +28,50 @@ const CellContainer = styled.div`
     ". track-below .";
 `;
 const TrackAbove = memo(styled.div`
-  background-color: var(--dragLayerBg);
+  opacity: ${(prop) => (prop.dragging === true ? "100%" : "0%")};
+  background-color: lightblue;
   border-radius: 5px;
   width: 100%;
   height: 100%;
   grid-area: track-above;
   :hover {
-    background-color: var(--dragLayerBgHover);
+    background-color: lightcoral;
   }
   transition: all 0.5s ease-out;
 `);
 const TrackBelow = memo(styled.div`
-  background-color: var(--dragLayerBg);
+  opacity: ${(prop) => (prop.dragging === true ? "100%" : "0%")};
+  background-color: lightblue;
   border-radius: 5px;
   width: 100%;
   height: 100%;
   grid-area: track-below;
   :hover {
-    background-color: var(--dragLayerBgHover);
+    background-color: lightcoral;
   }
   transition: all 0.5s ease-out;
 `);
 const LineBefore = memo(styled.div`
-  background-color: var(--dragLayerBg);
+  opacity: ${(prop) => (prop.dragging === true ? "100%" : "0%")};
+  background-color: lightblue;
   border-radius: 5px;
   width: 100%;
   height: 100%;
   grid-area: line-before;
   :hover {
-    background-color: var(--dragLayerBgHover);
+    background-color: lightcoral;
   }
   transition: all 0.5s ease-out;
 `);
 const LineAfter = memo(styled.div`
-  background-color: var(--dragLayerBg);
+  opacity: ${(prop) => (prop.dragging === true ? "100%" : "0%")};
+  background-color: lightblue;
   border-radius: 5px;
   width: 100%;
   height: 100%;
   grid-area: line-after;
   :hover {
-    background-color: var(--dragLayerBgHover);
+    background-color: lightcoral;
   }
   transition: all 0.5s ease-out;
 `);

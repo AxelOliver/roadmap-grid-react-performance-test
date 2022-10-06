@@ -1,12 +1,19 @@
 import { useState } from "react";
 import styled from "styled-components";
-import "./App.css";
 import Cell from "./Cell";
 import { v4 } from "uuid";
 
+const createNCells = (n) => {
+  let cells = []
+  for (let index = 0; index < n; index++) {
+    cells.push({uuid: v4()});
+  }
+  return cells
+}
+
 const Roadmap = () => {
-  const [layout, setLayout] = useState({rows: 1, columns: 1, cells: [{uuid: v4()}]});
-  const [dragging, setDragging] = useState({bg: 'white', hover: 'white'})
+  const [layout, setLayout] = useState({rows: 100, columns: 20, cells: createNCells(2000)});
+  const [dragging, setDragging] = useState(false)
 
   const {rows, columns, cells} = layout
   const addRow = () => {
@@ -28,14 +35,13 @@ const Roadmap = () => {
     setLayout({...layout, columns: columns + 1, cells: newCells});
   };
   const toggleDrag = () => {
-    dragging.bg === 'white' ? setDragging({bg: 'grey', hover: 'blue'}) : setDragging({bg: 'white', hover: 'white'})
+    dragging === false ? setDragging(true) : setDragging(false)
   }
-  console.log(cells);
   return (
-    <AppWrap visible={dragging} className="App">
+    <AppWrap className="App">
       <Wrapper columns={columns} rows={rows}>
         {cells.map((cell) => {
-          return <Cell key={cell.uuid} cell={cell} />;
+          return <Cell key={cell.uuid} cell={cell} dragging={dragging}/>;
         })}
       </Wrapper>
       <button onClick={() => addRow()}>Add Row</button>
@@ -46,8 +52,6 @@ const Roadmap = () => {
 };
 
 const AppWrap = styled.div`
-  --dragLayerBg: ${prop => prop.visible.bg};
-  --dragLayerBgHover: ${prop => prop.visible.hover};
 `
 
 const Wrapper = styled.div`
